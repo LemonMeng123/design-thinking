@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2026设计思维分享会 HTML PPT 2X</title>
+  <style>
+    :root {
+      --stage-w: 1920;
+      --stage-h: 1080;
+      --bg: #050506;
+      --green: #9cff35;
+      --muted: rgba(255,255,255,.62);
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: #fff;
+    }
+    body { display: grid; place-items: center; }
+    .deck {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      background: #000;
+      user-select: none;
+    }
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+    }
+    .slide.active { display: flex; }
+    .slide img {
+      width: 100vw;
+      height: 100vh;
+      object-fit: contain;
+      display: block;
+      background: #000;
+    }
+    .hud {
+      position: fixed;
+      left: 24px;
+      right: 24px;
+      bottom: 18px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .2s ease;
+    }
+    body:hover .hud, .hud.show { opacity: 1; }
+    .counter, .hint {
+      padding: 7px 12px;
+      border: 1px solid rgba(156,255,53,.28);
+      border-radius: 999px;
+      background: rgba(0,0,0,.5);
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: .02em;
+      backdrop-filter: blur(10px);
+    }
+    .counter strong { color: var(--green); font-weight: 800; }
+    .nav-hit {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 38%;
+      z-index: 5;
+      padding: 0;
+      border: 0;
+      outline: 0;
+      appearance: none;
+      -webkit-appearance: none;
+      background: transparent;
+      color: transparent;
+    }
+    .nav-hit.prev { left: 0; cursor: w-resize; }
+    .nav-hit.next { right: 0; cursor: e-resize; }
+    .overview {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      display: none;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 16px;
+      padding: 32px;
+      overflow: auto;
+      background: rgba(0,0,0,.92);
+    }
+    .overview.open { display: grid; }
+    .thumb {
+      position: relative;
+      border: 1px solid rgba(255,255,255,.16);
+      background: #111;
+      padding: 0;
+      aspect-ratio: 16 / 9;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .thumb.active { border-color: var(--green); box-shadow: 0 0 0 2px rgba(156,255,53,.22); }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .thumb span {
+      position: absolute;
+      left: 8px;
+      bottom: 8px;
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.72);
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 800;
+    }
+    @media print {
+      html, body { overflow: visible; height: auto; }
+      .deck { height: auto; }
+      .slide { position: relative; display: flex !important; page-break-after: always; height: 100vh; }
+      .hud, .nav-hit, .overview { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck" aria-label="2026设计思维分享会 HTML PPT 2X">
+    <section class="slide active" data-slide="1" data-original="Slide 1.png">
+      <img src="assets/slide-01.jpg" alt="Slide 1" draggable="false" />
+    </section>
+    <section class="slide" data-slide="2" data-original="Slide 2.png">
+      <img src="assets/slide-02.jpg" alt="Slide 2" draggable="false" />
+    </section>
+    <section class="slide" data-slide="3" data-original="Slide 3.png">
+      <img src="assets/slide-03.jpg" alt="Slide 3" draggable="false" />
+    </section>
+    <section class="slide" data-slide="4" data-original="Slide 4.png">
+      <img src="assets/slide-04.jpg" alt="Slide 4" draggable="false" />
+    </section>
+    <section class="slide" data-slide="5" data-original="Slide 5.png">
+      <img src="assets/slide-05.jpg" alt="Slide 5" draggable="false" />
+    </section>
+    <section class="slide" data-slide="6" data-original="Slide 6.png">
+      <img src="assets/slide-06.jpg" alt="Slide 6" draggable="false" />
+    </section>
+    <section class="slide" data-slide="7" data-original="Slide 7.png">
+      <img src="assets/slide-07.jpg" alt="Slide 7" draggable="false" />
+    </section>
+    <section class="slide" data-slide="8" data-original="Slide 8.png">
+      <img src="assets/slide-08.jpg" alt="Slide 8" draggable="false" />
+    </section>
+    <section class="slide" data-slide="9" data-original="Slide 9.png">
+      <img src="assets/slide-09.jpg" alt="Slide 9" draggable="false" />
+    </section>
+    <section class="slide" data-slide="10" data-original="Slide 10.png">
+      <img src="assets/slide-10.jpg" alt="Slide 10" draggable="false" />
+    </section>
+    <section class="slide" data-slide="11" data-original="Slide 11.png">
+      <img src="assets/slide-11.jpg" alt="Slide 11" draggable="false" />
+    </section>
+    <section class="slide" data-slide="12" data-original="Slide 12.png">
+      <img src="assets/slide-12.jpg" alt="Slide 12" draggable="false" />
+    </section>
+    <section class="slide" data-slide="13" data-original="Slide 13.png">
+      <img src="assets/slide-13.jpg" alt="Slide 13" draggable="false" />
+    </section>
+    <section class="slide" data-slide="14" data-original="Slide 14.png">
+      <img src="assets/slide-14.jpg" alt="Slide 14" draggable="false" />
+    </section>
+    <section class="slide" data-slide="15" data-original="Slide 15.png">
+      <img src="assets/slide-15.jpg" alt="Slide 15" draggable="false" />
+    </section>
+    <section class="slide" data-slide="16" data-original="Slide 16.png">
+      <img src="assets/slide-16.jpg" alt="Slide 16" draggable="false" />
+    </section>
+    <section class="slide" data-slide="17" data-original="Slide 17.png">
+      <img src="assets/slide-17.jpg" alt="Slide 17" draggable="false" />
+    </section>
+    <section class="slide" data-slide="18" data-original="Slide 18.png">
+      <img src="assets/slide-18.jpg" alt="Slide 18" draggable="false" />
+    </section>
+    <section class="slide" data-slide="19" data-original="Slide 19.png">
+      <img src="assets/slide-19.jpg" alt="Slide 19" draggable="false" />
+    </section>
+    <section class="slide" data-slide="20" data-original="Slide 20.png">
+      <img src="assets/slide-20.jpg" alt="Slide 20" draggable="false" />
+    </section>
+    <section class="slide" data-slide="21" data-original="Slide 21.png">
+      <img src="assets/slide-21.jpg" alt="Slide 21" draggable="false" />
+    </section>
+    <section class="slide" data-slide="22" data-original="Slide 22.png">
+      <img src="assets/slide-22.jpg" alt="Slide 22" draggable="false" />
+    </section>
+    <section class="slide" data-slide="23" data-original="Slide 23.png">
+      <img src="assets/slide-23.jpg" alt="Slide 23" draggable="false" />
+    </section>
+    <section class="slide" data-slide="24" data-original="Slide 24.png">
+      <img src="assets/slide-24.jpg" alt="Slide 24" draggable="false" />
+    </section>
+    <section class="slide" data-slide="25" data-original="Slide 25.png">
+      <img src="assets/slide-25.jpg" alt="Slide 25" draggable="false" />
+    </section>
+    <section class="slide" data-slide="26" data-original="Slide 26.png">
+      <img src="assets/slide-26.jpg" alt="Slide 26" draggable="false" />
+    </section>
+    <section class="slide" data-slide="27" data-original="Slide 27.png">
+      <img src="assets/slide-27.jpg" alt="Slide 27" draggable="false" />
+    </section>
+    <section class="slide" data-slide="28" data-original="Slide 28.png">
+      <img src="assets/slide-28.jpg" alt="Slide 28" draggable="false" />
+    </section>
+    <section class="slide" data-slide="29" data-original="Slide 29.png">
+      <img src="assets/slide-29.jpg" alt="Slide 29" draggable="false" />
+    </section>
+    <section class="slide" data-slide="30" data-original="Slide 30.png">
+      <img src="assets/slide-30.jpg" alt="Slide 30" draggable="false" />
+    </section>
+    <section class="slide" data-slide="31" data-original="Slide 31.png">
+      <img src="assets/slide-31.jpg" alt="Slide 31" draggable="false" />
+    </section>
+    <section class="slide" data-slide="32" data-original="Slide 32.png">
+      <img src="assets/slide-32.jpg" alt="Slide 32" draggable="false" />
+    </section>
+    <section class="slide" data-slide="33" data-original="Slide 33.png">
+      <img src="assets/slide-33.jpg" alt="Slide 33" draggable="false" />
+    </section>
+  </main>
+  <button class="nav-hit prev" aria-label="上一页"></button>
+  <button class="nav-hit next" aria-label="下一页"></button>
+  <div class="hud" id="hud">
+    <div class="counter"><strong id="current">01</strong> / 33</div>
+    <div class="hint">← → / Space 翻页 · O 缩略图 · F 全屏</div>
+  </div>
+  <div class="overview" id="overview" aria-label="缩略图导航">
+      <button class="thumb active" data-go="1" title="Slide 1">
+        <img src="assets/slide-01.jpg" alt="Slide 1" />
+        <span>01</span>
+      </button>
+      <button class="thumb" data-go="2" title="Slide 2">
+        <img src="assets/slide-02.jpg" alt="Slide 2" />
+        <span>02</span>
+      </button>
+      <button class="thumb" data-go="3" title="Slide 3">
+        <img src="assets/slide-03.jpg" alt="Slide 3" />
+        <span>03</span>
+      </button>
+      <button class="thumb" data-go="4" title="Slide 4">
+        <img src="assets/slide-04.jpg" alt="Slide 4" />
+        <span>04</span>
+      </button>
+      <button class="thumb" data-go="5" title="Slide 5">
+        <img src="assets/slide-05.jpg" alt="Slide 5" />
+        <span>05</span>
+      </button>
+      <button class="thumb" data-go="6" title="Slide 6">
+        <img src="assets/slide-06.jpg" alt="Slide 6" />
+        <span>06</span>
+      </button>
+      <button class="thumb" data-go="7" title="Slide 7">
+        <img src="assets/slide-07.jpg" alt="Slide 7" />
+        <span>07</span>
+      </button>
+      <button class="thumb" data-go="8" title="Slide 8">
+        <img src="assets/slide-08.jpg" alt="Slide 8" />
+        <span>08</span>
+      </button>
+      <button class="thumb" data-go="9" title="Slide 9">
+        <img src="assets/slide-09.jpg" alt="Slide 9" />
+        <span>09</span>
+      </button>
+      <button class="thumb" data-go="10" title="Slide 10">
+        <img src="assets/slide-10.jpg" alt="Slide 10" />
+        <span>10</span>
+      </button>
+      <button class="thumb" data-go="11" title="Slide 11">
+        <img src="assets/slide-11.jpg" alt="Slide 11" />
+        <span>11</span>
+      </button>
+      <button class="thumb" data-go="12" title="Slide 12">
+        <img src="assets/slide-12.jpg" alt="Slide 12" />
+        <span>12</span>
+      </button>
+      <button class="thumb" data-go="13" title="Slide 13">
+        <img src="assets/slide-13.jpg" alt="Slide 13" />
+        <span>13</span>
+      </button>
+      <button class="thumb" data-go="14" title="Slide 14">
+        <img src="assets/slide-14.jpg" alt="Slide 14" />
+        <span>14</span>
+      </button>
+      <button class="thumb" data-go="15" title="Slide 15">
+        <img src="assets/slide-15.jpg" alt="Slide 15" />
+        <span>15</span>
+      </button>
+      <button class="thumb" data-go="16" title="Slide 16">
+        <img src="assets/slide-16.jpg" alt="Slide 16" />
+        <span>16</span>
+      </button>
+      <button class="thumb" data-go="17" title="Slide 17">
+        <img src="assets/slide-17.jpg" alt="Slide 17" />
+        <span>17</span>
+      </button>
+      <button class="thumb" data-go="18" title="Slide 18">
+        <img src="assets/slide-18.jpg" alt="Slide 18" />
+        <span>18</span>
+      </button>
+      <button class="thumb" data-go="19" title="Slide 19">
+        <img src="assets/slide-19.jpg" alt="Slide 19" />
+        <span>19</span>
+      </button>
+      <button class="thumb" data-go="20" title="Slide 20">
+        <img src="assets/slide-20.jpg" alt="Slide 20" />
+        <span>20</span>
+      </button>
+      <button class="thumb" data-go="21" title="Slide 21">
+        <img src="assets/slide-21.jpg" alt="Slide 21" />
+        <span>21</span>
+      </button>
+      <button class="thumb" data-go="22" title="Slide 22">
+        <img src="assets/slide-22.jpg" alt="Slide 22" />
+        <span>22</span>
+      </button>
+      <button class="thumb" data-go="23" title="Slide 23">
+        <img src="assets/slide-23.jpg" alt="Slide 23" />
+        <span>23</span>
+      </button>
+      <button class="thumb" data-go="24" title="Slide 24">
+        <img src="assets/slide-24.jpg" alt="Slide 24" />
+        <span>24</span>
+      </button>
+      <button class="thumb" data-go="25" title="Slide 25">
+        <img src="assets/slide-25.jpg" alt="Slide 25" />
+        <span>25</span>
+      </button>
+      <button class="thumb" data-go="26" title="Slide 26">
+        <img src="assets/slide-26.jpg" alt="Slide 26" />
+        <span>26</span>
+      </button>
+      <button class="thumb" data-go="27" title="Slide 27">
+        <img src="assets/slide-27.jpg" alt="Slide 27" />
+        <span>27</span>
+      </button>
+      <button class="thumb" data-go="28" title="Slide 28">
+        <img src="assets/slide-28.jpg" alt="Slide 28" />
+        <span>28</span>
+      </button>
+      <button class="thumb" data-go="29" title="Slide 29">
+        <img src="assets/slide-29.jpg" alt="Slide 29" />
+        <span>29</span>
+      </button>
+      <button class="thumb" data-go="30" title="Slide 30">
+        <img src="assets/slide-30.jpg" alt="Slide 30" />
+        <span>30</span>
+      </button>
+      <button class="thumb" data-go="31" title="Slide 31">
+        <img src="assets/slide-31.jpg" alt="Slide 31" />
+        <span>31</span>
+      </button>
+      <button class="thumb" data-go="32" title="Slide 32">
+        <img src="assets/slide-32.jpg" alt="Slide 32" />
+        <span>32</span>
+      </button>
+      <button class="thumb" data-go="33" title="Slide 33">
+        <img src="assets/slide-33.jpg" alt="Slide 33" />
+        <span>33</span>
+      </button>
+  </div>
+  <script>
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const thumbs = Array.from(document.querySelectorAll('.thumb'));
+    const current = document.getElementById('current');
+    const overview = document.getElementById('overview');
+    const hud = document.getElementById('hud');
+    let index = Math.max(0, Math.min(slides.length - 1, (parseInt(location.hash.replace('#', ''), 10) || 1) - 1));
+    let hudTimer;
+
+    function showHud() {
+      hud.classList.add('show');
+      clearTimeout(hudTimer);
+      hudTimer = setTimeout(() => hud.classList.remove('show'), 1300);
+    }
+    function render() {
+      slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+      thumbs.forEach((thumb, i) => thumb.classList.toggle('active', i === index));
+      current.textContent = String(index + 1).padStart(2, '0');
+      const hash = '#' + String(index + 1).padStart(2, '0');
+      if (location.hash !== hash) history.replaceState(null, '', hash);
+      showHud();
+    }
+    function go(next) {
+      index = Math.max(0, Math.min(slides.length - 1, next));
+      render();
+    }
+    function step(delta) { go(index + delta); }
+    function toggleOverview(force) {
+      overview.classList.toggle('open', force ?? !overview.classList.contains('open'));
+      showHud();
+    }
+    async function toggleFullscreen() {
+      if (!document.fullscreenElement) await document.documentElement.requestFullscreen?.();
+      else await document.exitFullscreen?.();
+    }
+
+    document.querySelector('.nav-hit.prev').addEventListener('click', () => step(-1));
+    document.querySelector('.nav-hit.next').addEventListener('click', () => step(1));
+    thumbs.forEach((thumb, i) => thumb.addEventListener('click', () => { go(i); toggleOverview(false); }));
+    window.addEventListener('keydown', (event) => {
+      const key = event.key.toLowerCase();
+      if (['arrowright', 'pagedown', ' '].includes(key)) { event.preventDefault(); step(1); }
+      if (['arrowleft', 'pageup', 'backspace'].includes(key)) { event.preventDefault(); step(-1); }
+      if (key === 'home') go(0);
+      if (key === 'end') go(slides.length - 1);
+      if (key === 'o') toggleOverview();
+      if (key === 'escape') toggleOverview(false);
+      if (key === 'f') toggleFullscreen();
+    });
+    window.addEventListener('hashchange', () => {
+      const next = (parseInt(location.hash.replace('#', ''), 10) || 1) - 1;
+      if (next !== index) go(next);
+    });
+    render();
+  </script>
+</body>
+</html>
